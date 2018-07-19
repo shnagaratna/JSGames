@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurants</title>
+ </head>  
+<body>
+    <script>
+        let showPosition=(data)=>{
+            console.log(data.coords);
+            let latitude=data.coords.latitude;
+            let longitude=data.coords.longitude;
+        };
+
+        let showError=(data)=>{
+            console.log("error");
+        };
+
+        if(navigator.geolocation){
+            var optn={
+                enableHighAccuracy:true,
+                timeout:Infinity,
+                maximumAge:0
+            };
+
+        navigator.geolocation.getCurrentPosition(showPosition,showError,optn);    
+
+        for(let i=0;i<10;i++)
+            console.log(i);
+        }
+        else{
+            alert('geolocation is not supported in your browser');
+        }
+    </script>
+    
+</body>
+</html>

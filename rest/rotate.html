@@ -1,0 +1,102 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>string Rotation example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" 
+    <script src="main.js"></script>
+
+    <style>
+        div.button{
+            display: inline-block;
+            background: #33bb;
+            padding:20px;
+            color:white;
+            cursor:pointer;
+        }
+
+        p.word{
+            font-size: 5cm;
+        }
+
+        div.container > *{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        div.container{
+            margin: 0 auto;
+            width: 60%;
+        }
+
+        .rect{
+                width:60%;
+                margin:initial;
+                cursor: pointer;
+                text-align: center;
+             }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="container">
+            <div class="button left">&lt</div>
+            <p class="word"></p>
+            <div class="button right">&gt</div>
+         </div>
+    </div>
+
+    <div class="rect">
+        <div><input type="text" id="id1"/></div>
+    </div>
+    
+
+    <script>
+        let wordBox=document.querySelector(".word");
+        let leftButton=document.querySelector('.left');
+        let rightButton=document.querySelector('.right');
+
+        //var input=document.getElementById("id1").value;
+        //console.log(input);
+
+        leftButton.addEventListener('click',e=>{
+            word=rotateOnceLeft(word);
+            wordBox.textContent=word;
+        });
+
+        rightButton.addEventListener('click',e=>{
+            word=rotateOnceRight(word);
+            wordBox.textContent=word;
+        });
+       
+        let word="hello";
+        wordBox.textContent=word;
+
+        function rotateOnceLeft(w){
+            return w.slice(1)+w[0];
+        }
+
+        function rotateLeft(w,times){
+            //var times=document.getElementById("id1").value;
+            for(let i=0;i<times;i++)
+             w=rotateOnceLeft(w);
+             return w;
+        }
+
+        function rotateOnceRight(w){
+            return w[w.length-1]+w.slice(0,w.length-1)
+        }
+
+        function rotateRight(w,times){
+           // var times=document.getElementById("id1").value;
+            for(let i=0;i<times;i++)
+             w=rotateOnceRight(w);
+             return w;
+        }
+
+    </script>
+    
+</body>
+</html>
