@@ -1,0 +1,99 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Text Animation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+
+    <style>
+       div.typed{
+           font-family:'Courier New', Courier, monospace;
+           font-size: 2rem;
+           display: inline-block;
+           color: brown;
+           padding: 20px 0 20px 20px;
+        
+        }
+
+        .textbox{
+            width:70%;
+            margin:0 auto;
+        }
+
+        .container{
+            background-color:blueviolet;
+            min-height: 80px;
+        }
+
+        .typed-cursor{
+            color:white;
+            font-size: 2rem;
+            animation:blinker 1s linear infinite;
+        }
+        
+        @keyframes blinker{
+            50% {
+                opacity: 0;
+            }
+        }
+
+        div.textbox > *{
+            vertical-align: baseline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="textbox">
+            <div class="typed"> </div>
+            <span class="typed-cursor">|</span>  
+         </div>  
+    </div>
+    <script>
+        window.onload=function(){
+            let sentences=["welcome to sathvik softech...","The software training and development hub"];
+            //let text="welcome to sathvik softech...";
+            let typedBox=document.querySelector(".typed");
+
+            let stopIndex=1;
+            let appending=true;
+            let sentenceIndex=0;
+            let numOfSentences=sentences.length;
+
+            function getNextSentence(){
+                sentenceIndex++;
+                let sentence=sentences[sentenceIndex % numOfSentences];
+                return sentence;
+            }
+
+            let text=sentences[0];
+
+            function animateTyping(){
+                
+                typedBox.innerText=text.slice(0,stopIndex);  
+               
+                if(appending){
+                    stopIndex++;
+
+                    if(stopIndex>text.length)
+                    appending=false;
+                }
+               
+                else{ 
+                     stopIndex--;
+                     if(stopIndex==0){
+                        appending=true;
+                        text=getNextSentence();
+                    }
+                }
+            }
+
+            setInterval(animateTyping,200);
+        }
+    </script>
+</body>
+</html>
