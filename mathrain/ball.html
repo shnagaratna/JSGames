@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rain drop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+
+    <style>
+        .container{
+            width:500px;
+            height:500px;
+            border:2px solid black;
+            position: relative;
+        }
+        .rectangle{
+             position:absolute;
+             top:50px;
+             left:30px;
+             width: 50px;
+             height:50px;
+             /*border: 2px solid red;*/
+             border-radius: 50%;
+             background-image: url("ball image/ball.jpeg");
+             background-size: cover;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <div class="rectangle"> </div>
+        </div>
+        <script>
+             window.onload=function(){
+                 let rectangle=document.querySelector(".rectangle");
+
+                 setInterval(function(){
+                     let top=window.getComputedStyle(rectangle,null).top;
+                     let newTop=parseInt(top)+5;
+                     rectangle.style.top=newTop+"px";
+                 },500);
+             }
+        </script>
+</body>
+</html>
