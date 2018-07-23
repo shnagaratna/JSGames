@@ -1,0 +1,66 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rain</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+
+    <style>
+        .rectangle{
+             background-color:red;
+             display:inline-block;
+             margin:0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+    <script>
+        function draw(){
+            let container=document.querySelector(".container");
+            for(let i=0;i<10;i++){
+                let r1=new rectangle(30,20);
+                //let r1=new rectangle(5*i,40);
+                 //container.innerHTML=r1.render();
+                container.appendChild(r1.render());
+            }
+        }
+        
+        class rectangle{
+            constructor(height,width){
+                this.height=height;
+                this.width=width;
+            }
+            //area(){
+            //    return this.height*this.width;
+            //    }
+
+            get area(){return this.height*this.width;}
+
+            //render(){
+            //    return `<div class="rectangle"> </div>`
+            //    }
+
+            render(){
+                let element=document.createElement("div");
+                element.style.width=this.width+"px";
+                element.style.height=this.height+"px";
+                element.classList.add("rectangle");
+                return element;
+            }    
+        }
+
+        let r1=new rectangle(3,2);
+        console.log(r1.height,r1.width);
+        //console.log(r1.area());
+        console.log(r1.area);
+        
+        draw();
+    </script>
+</body>
+</html>
