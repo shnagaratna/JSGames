@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main</title>
+    
+    <style>
+        div.container{
+            position:relative;
+            }
+        div.drop{
+            position:absolute;
+            background-image: url("ball image/drop.jpeg");
+            background-size: cover;
+            width:100px;
+            height:100px;
+            padding-top:50px;
+            text-align:center;
+            display: inline-block;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+       
+    </div>
+   
+   <script>
+        class Drop{
+            constructor(operand1,operator,operand2){
+                this.operand1 = operand1;
+                this.operand2 = operand2;
+                this.operator = operator;
+                this.top = 0;
+                this.result=eval(this.operand1+this.operator+this.operand2);
+            }
+
+            move(){
+                this.top += 5;
+                this.element.style.top = this.top+"px";
+            }
+
+            render(parent,top,left){
+                this.element = document.createElement("div");
+                this.element.classList.add("drop");
+                this.element.style.top = top+"px";
+                this.element.style.left = left+"px";
+         
+                this.element.innerHTML = `
+                <div class="operand">${this.operand1}</div>
+                <div class="operator">${this.operator}</div>
+                <div class="operand">${this.operand2}</div>
+                 `;
+            parent.appendChild(this.element);
+
+            }
+    }
+
+    class Game{
+        constructor(maxDrops,container){
+            this.maxDrops=maxDrops;
+            this.drops=[];
+            this.expr="";
+            this.container=container;
+            this.utils=this.setUpUtils();
+            this.setUpKeyHandling();
+        }
+
+        toString(){
+            return "game";
+        }
+
+        start(){   
+            setInterval(()=>{
+            if (this.drops.length < 10){
+                let drop = new Drop(this.utils.genOperand(),
+                                this.utils.genOperator(),
+                                this.utils.genOperand());
+                drop.render(this.container,0,this.utils.getDropPosition());
+                this.drops.push(drop);
+            }
+            this.drops.forEach(drop => drop.move());
+            // console.log(this);
+            // setTimeout(this,50);
+        },150);
+
+     }
+    
+        updateDrops(result){
+             this.drops=this.drops.filter(drop=>
+            drop.result !==result);
+         }
+
+        setUpKeyHandling(){ 
+            document.addEventListener('keypress',(event)=>{
+                if(event.key==="Enter")
+                   {alert(eval(this.expr)); }
+                else
+                   this.expr += event.key;
+                });
+        }
+    
+        setUpUtils(){
+            return{
+                 genOperand : () => Math.round(Math.random()*100),
+                 genOperator : () => ['+','-','*','/'][Math.round(Math.random()*10)%4],
+
+                 getDropPosition : () => Math.round(Math.random()*1000)%(window.innerWidth)
+            };
+
+        }
+    }
+
+    function setUpKeyPress(){
+        document.addEventListener("keypress",(event)=>{
+            
+        });
+    }
+
+    window.onload = function(){
+       // let drops = [];
+       // let expr="";
+       //let container = document.querySelector(".container");
+
+        let game=new Game(10,document.querySelector(".container"));
+        game.start();
+    };
+
+    </script>
+</body>
+</html> 
